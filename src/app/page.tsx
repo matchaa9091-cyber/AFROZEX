@@ -34,7 +34,7 @@ export default function Home() {
       title: "SPORTS ANALYSIS",
       description: "Deep insights and statistical breakdowns of the sporting world.",
       icon: "📊",
-      link: "https://sports.afrozex.com",
+      link: "https://dailypredictorug.afrozex.com/",
       class: styles.sports,
     },
     {
