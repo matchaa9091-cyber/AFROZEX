@@ -1,9 +1,20 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   const projects = [
     {
       title: "TECHNOLOGY",
@@ -33,6 +44,14 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <div 
+        className={styles.pointerGlow} 
+        style={{ 
+          left: mousePos.x, 
+          top: mousePos.y,
+        }} 
+      />
+
       <nav className={styles.nav}>
         <div className={styles.logo}>AFROZEX</div>
         <div className={styles.navLinks}>
@@ -44,21 +63,6 @@ export default function Home() {
           Explore
         </Link>
       </nav>
-
-      <section className={`${styles.hero} animate-fadeIn`}>
-        <h1 className={styles.title}>Multidimensional<br/>Portal</h1>
-        <p className={styles.subtitle}>
-          Bridging innovation, knowledge, and entertainment with advanced parallel ecosystems.
-        </p>
-        <div className={styles.heroActions}>
-          <Link href="#ecosystem" className={styles.primaryBtn}>
-            Discover Projects
-          </Link>
-          <a href="https://tech.afrozex.com" className={styles.secondaryBtn}>
-            Enter Technology
-          </a>
-        </div>
-      </section>
 
       <div className={styles.grid} id="ecosystem">
         {projects.map((project, index) => (
@@ -74,10 +78,6 @@ export default function Home() {
           </a>
         ))}
       </div>
-{/* 
-      <footer className={styles.footer}>
-        <p>&copy; {new Date().getFullYear()} AFROZEX. All rights reserved.</p>
-      </footer> */}
     </main>
   );
 }

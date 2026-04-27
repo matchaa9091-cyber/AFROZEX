@@ -66,6 +66,14 @@ a {
     radial-gradient(circle at 20% 90%, var(--g-green) 0%, transparent 40%);
   filter: blur(80px);
   opacity: 0.8;
+  animation: mesh-move 20s ease-in-out infinite alternate;
+  background-size: 150% 150%;
+}
+
+@keyframes mesh-move {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 100%; }
 }
 
 /* Glassmorphism utility */
